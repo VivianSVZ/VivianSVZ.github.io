@@ -1,6 +1,6 @@
 {
   "name": "Adventskalender",
-  "short_name": "Advent",
+  "short_name": "Adventskalender",
   "description": "Ein interaktiver Adventskalender mit Bibelstellen.",
   "scope": "/viviansvz.github.io/",
   "start_url": "/viviansvz.github.io/",
