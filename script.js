@@ -115,21 +115,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         door.addEventListener("click", () => {
-            if (!openedDoors.includes(day)) {
-                openRiddle(day);
-            }
+            openRiddle(day); // Immer das Popup öffnen
         });
     });
 
 // Popup mit Rätsel anzeigen
     function openRiddle(day) {
-        console.log("openPopup wurde aufgerufen");
         const riddle = riddles[day];
         if (!riddle) return;
 
+        // Wenn das Türchen bereits geöffnet wurde
+        if (openedDoors.includes(day)) {
+            riddleTitle.textContent = `Türchen ${day}`;
+            riddleText.textContent = riddles[day].successMessage; // Zeige den individuellen Erfolgstext
+            popup.classList.remove("hidden");
+            answerInput.style.display = "none"; // Verstecke das Eingabefeld
+            submitAnswer.style.display = "none"; // Verstecke den Prüf-Button
+            feedback.textContent = "";
+            return;
+        }
+
+        // Türchen ist noch nicht geöffnet, zeige das Rätsel
         riddleTitle.textContent = `Türchen ${day}`;
         riddleText.textContent = riddle.question;
         popup.classList.remove("hidden");
+        answerInput.style.display = "block"; // Zeige das Eingabefeld
+        submitAnswer.style.display = "block"; // Zeige den Prüf-Button
+        feedback.textContent = "";
 
         // Antwort prüfen
         submitAnswer.onclick = () => checkAnswer(day, riddle.answer);
